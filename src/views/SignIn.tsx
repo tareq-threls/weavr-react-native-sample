@@ -23,7 +23,7 @@ import {WEAVR_BASE_URL} from '../constants/constants';
 import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-
+import {loginAsync} from '../repo/OnVirtualRepo';
 export default function SignIn({navigation}: {navigation: any}) {
   const [tagPass1, setTagPass1] = React.useState<string | undefined>();
   const [tagPass2, setTagPass2] = React.useState<string | undefined>();
@@ -81,26 +81,9 @@ export default function SignIn({navigation}: {navigation: any}) {
 
   //Just a login function
   const loginApiAsync = async () => {
-    try {
-      const response = await fetch(WEAVR_BASE_URL + 'login_with_password', {
-        method: 'post',
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: emailAddress ? emailAddress : 'gary@test.com',
-          password: {value: password},
-        }),
-      });
-      const json = await response.json();
-
-      console.log(json);
-      setLoginToken(json.token);
-      setUserTokenInSDK(json.token);
-    } catch (error) {
-      console.error(error);
-    }
+    const json = await loginAsync(password, emailAddress);
+    setLoginToken(json.token);
+    setUserTokenInSDK(json.token);
   };
 
   const navigateToNextPage = () => {

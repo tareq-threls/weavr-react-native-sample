@@ -17,7 +17,8 @@ import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {Icon} from '@rneui/themed';
 import {SecureCardCVVLabel, SecureCardNumberLabel} from '@weavr/react-native';
-
+import {CardItem} from '../models/CardItem';
+import {getCardsAsync} from '../repo/OnVirtualRepo';
 export default function Cards({
   route,
   navigation,
@@ -31,35 +32,8 @@ export default function Cards({
   const labelRef3 = useRef<any>();
   const labelRef4 = useRef<any>();
   const getCards = async () => {
-    try {
-      const response = await fetch(WEAVR_BASE_URL + 'managed_cards', {
-        method: 'get',
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json',
-          Authorization: 'Bearer ' + route.params.token.toString(),
-        },
-      });
-      const json = await response.json();
-      var newCards: CardItem[] = [];
-      console.log(json.cards);
-      json.cards.forEach((element: any) => {
-        newCards.push({
-          cardBrand: element.cardBrand,
-          cardFirst: element.cardNumberFirstSix,
-          cardLast: element.cardNumberLastFour,
-          currency: element.currency,
-          cardNumber: element.cardNumber.value,
-          cvv: element.cvv.value,
-          nameOnCard: element.nameOnCard,
-          friendlyName: element.friendlyName,
-        });
-      });
-      console.log(newCards);
-      setCards(newCards);
-    } catch (error) {
-      console.error(error);
-    }
+    const newCards = await getCardsAsync(route.params.token.toString());
+    setCards(newCards);
   };
 
   React.useEffect(() => {
@@ -242,14 +216,3 @@ const styles = StyleSheet.create({
     fontFamily: 'Cochin',
   },
 });
-
-interface CardItem {
-  cardBrand: string;
-  nameOnCard: string;
-  currency: string;
-  cvv: string;
-  cardNumber: string;
-  friendlyName: string;
-  cardFirst: string;
-  cardLast: string;
-}
