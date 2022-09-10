@@ -86,7 +86,7 @@ const App = () => {
             name={Routes.Update_Password}
             component={UpdatePassword}
           />
-          <Stack.Screen name={Routes.Cards} component={Cards} />
+          <Stack.Screen name={Routes.Cards_Page} component={Cards} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
@@ -120,5 +120,5 @@ export enum Routes {
   Sign_In = 'Sign in',
   All_Components = 'All Components',
   Update_Password = 'Update Password',
-  Cards = 'Cards',
+  Cards_Page = 'Cards',
 }

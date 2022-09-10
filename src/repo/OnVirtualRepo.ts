@@ -1,8 +1,12 @@
 import {WEAVR_BASE_URL} from '../constants/constants';
 import {CardItem} from '../models/CardItem';
+import {updateBaseURL} from '../constants/constants';
+
 //Just a login function
-const loginAsync = async (password: string, emailAddress?: string) => {
+const loginAsync = async (password?: string, emailAddress?: string) => {
   try {
+    await updateBaseURL();
+    console.log(WEAVR_BASE_URL);
     const response = await fetch(WEAVR_BASE_URL + 'login_with_password', {
       method: 'post',
       headers: {
@@ -25,6 +29,7 @@ const loginAsync = async (password: string, emailAddress?: string) => {
 
 const getCardsAsync = async (token: string) => {
   try {
+    await updateBaseURL();
     const response = await fetch(WEAVR_BASE_URL + 'managed_cards', {
       method: 'get',
       headers: {

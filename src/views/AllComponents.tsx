@@ -24,7 +24,9 @@ export default function AllComponents({
   const labelRef = useRef<any>();
 
   const navigateToCardsPage = () => {
-    navigation.navigate(Routes.Cards, {token: route.params.token.toString()});
+    navigation.navigate(Routes.Cards_Page, {
+      token: route.params.token.toString(),
+    });
   };
 
   return (

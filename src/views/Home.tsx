@@ -3,13 +3,8 @@ import React, {type PropsWithChildren} from 'react';
 import colors from '../utils/material-colors.json';
 
 import {
-  Alert,
-  Button,
-  ColorValue,
   Pressable,
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   useColorScheme,
@@ -17,20 +12,13 @@ import {
   Modal,
   ActivityIndicator,
 } from 'react-native';
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Center from '../widgets/Center';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Chip, Divider, Icon, Image} from '@rneui/themed';
 import {Routes} from '../App';
 import {initializeUXComponents} from '@weavr/react-native';
 import {ENV} from '@weavr/react-native/lib/typescript/types/WeavrEnv';
 import Toast from 'react-native-simple-toast';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Home = ({navigation}: {navigation: any}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -39,7 +27,35 @@ const Home = ({navigation}: {navigation: any}) => {
   };
 
   const [showModal, setShowModal] = React.useState<boolean>(false);
-  const [selectedENV, setSelectedENV] = React.useState<string>();
+  const [selectedENV, setSelectedENV] = React.useState<ENV>();
+  React.useEffect(() => {
+    AsyncStorage.getItem('@env').then(env => {
+      console.log('ENV:   ' + env);
+      switch (env) {
+        case 'Production': {
+          setSelectedENV('Production');
+          break;
+        }
+        case 'Sandbox': {
+          setSelectedENV('Sandbox');
+          break;
+        }
+
+        case 'QA': {
+          setSelectedENV('QA');
+          break;
+        }
+      }
+    });
+  });
+
+  const storeEnv = async (env: string) => {
+    try {
+      await AsyncStorage.setItem('@env', env);
+    } catch (e) {
+      console.log('async storage error:  ' + e);
+    }
+  };
   const navigateToNextPage = () => {
     if (selectedENV != null) {
       navigation.navigate(Routes.Sign_In);
@@ -52,6 +68,7 @@ const Home = ({navigation}: {navigation: any}) => {
     initializeUXComponents(env, uiKey)
       .then(res => console.log(res))
       .catch(e => console.log(e));
+    storeEnv(env);
   };
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -103,35 +120,38 @@ const Home = ({navigation}: {navigation: any}) => {
           <Text style={{color: colors.blue[600]}}>Select Your Environment</Text>
           <Divider width={1.5} />
 
-          <View>
+          <View style={styles.center}>
             <Chip
               title="Production"
               onPress={() => {
                 console.log('Icon chip was pressed!');
-                setSelectedENV('production');
+                setSelectedENV('Production');
                 initialize('Production', '6keyUw1XiUkBbjXjgTUACA==');
+                setShowModal(false);
               }}
-              type={selectedENV === 'production' ? 'solid' : 'outline'}
+              type={selectedENV === 'Production' ? 'solid' : 'outline'}
               containerStyle={styles.marginVertical15}
             />
             <Chip
               title="Sandbox"
               onPress={() => {
                 console.log('Icon chip was pressed!');
-                setSelectedENV('sandbox');
+                setSelectedENV('Sandbox');
                 initialize('Sandbox', 'I1pm4rfquPcBeTaVVFQACA==');
+                setShowModal(false);
               }}
-              type={selectedENV === 'sandbox' ? 'solid' : 'outline'}
+              type={selectedENV === 'Sandbox' ? 'solid' : 'outline'}
               containerStyle={styles.marginVertical15}
             />
             <Chip
               title="QA"
               onPress={() => {
                 console.log('Icon chip was pressed!');
-                setSelectedENV('qa');
+                setSelectedENV('QA');
                 initialize('QA', 'cfE2+PcFh20BbxPI9+IACQ==');
+                setShowModal(false);
               }}
-              type={selectedENV === 'qa' ? 'solid' : 'outline'}
+              type={selectedENV === 'QA' ? 'solid' : 'outline'}
               containerStyle={styles.marginVertical15}
             />
           </View>
@@ -175,6 +195,9 @@ const MyModal: React.FC<
 };
 
 const styles = StyleSheet.create({
+  center: {
+    justifyContent: 'center',
+  },
   modalCrossPos: {
     position: 'absolute',
     right: '2%',
@@ -183,7 +206,7 @@ const styles = StyleSheet.create({
   modalCardBackground: {
     backgroundColor: 'white',
     width: '60%',
-    height: '30%',
+    height: 260,
     justifyContent: 'center',
     alignItems: 'center',
   },
