@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {type PropsWithChildren} from 'react';
 import colors from '../utils/material-colors.json';
@@ -55,56 +54,29 @@ const Home = ({navigation}: {navigation: any}) => {
       .catch(e => console.log(e));
   };
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-      }}>
-      <View
-        style={{
-          flex: 1,
-          flexDirection: 'column',
-          backgroundColor: 'linen',
-        }}>
-        <View
-          style={{
-            position: 'relative',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            width: '100%',
-            height: '20%',
-          }}>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.background}>
+        <View style={styles.envSelector}>
           <Image
             source={{
               uri: 'https://assets-global.website-files.com/605f2547102fdbbeff1b21e0/60b5fcf89069129d4f1d3758_weavr-logo.png',
             }}
-            style={{
-              aspectRatio: 5,
-              width: '75%',
-            }}
+            style={styles.logo}
             PlaceholderContent={<ActivityIndicator />}
           />
         </View>
-        <View
-          style={{
-            position: 'relative',
-
-            marginTop: '10%',
-            alignItems: 'flex-start',
-            flex: 1,
-          }}>
+        <View style={styles.nextBtn}>
           <Pressable
             onPress={() => {
               navigateToNextPage();
             }}>
-            <View style={{margin: 20}}>
-              <View style={{flexDirection: 'row'}}>
-                <Text style={{fontSize: 18, color: colors.blue[700]}}>
-                  UX-Components
-                </Text>
+            <View style={styles.margin20}>
+              <View style={styles.row}>
+                <Text style={styles.btnFontStyle}>UX-Components</Text>
                 <Icon name="chevron-right" color="#00aced" />
               </View>
               <Divider
-                style={{paddingTop: 5}}
+                style={styles.padding5}
                 width={1}
                 color={colors.blue[700]}
               />
@@ -112,13 +84,12 @@ const Home = ({navigation}: {navigation: any}) => {
           </Pressable>
         </View>
 
-        <View style={{position: 'absolute', right: '05%', top: '1.5%'}}>
+        <View style={styles.envSelectorContainer}>
           <Pressable
             onPress={() => {
-              console.log('Pressed on the fu');
               setShowModal(true);
             }}>
-            <Text style={{color: 'dodgerblue'}}> Switch ENV</Text>
+            <Text style={styles.envSwitchColor}> Switch ENV</Text>
           </Pressable>
         </View>
       </View>
@@ -128,7 +99,7 @@ const Home = ({navigation}: {navigation: any}) => {
         onCancel={() => {
           setShowModal(false);
         }}>
-        <View style={{flex: 1, margin: 12}}>
+        <View style={styles.modalHeader}>
           <Text style={{color: colors.blue[600]}}>Select Your Environment</Text>
           <Divider width={1.5} />
 
@@ -141,7 +112,7 @@ const Home = ({navigation}: {navigation: any}) => {
                 initialize('Production', '6keyUw1XiUkBbjXjgTUACA==');
               }}
               type={selectedENV === 'production' ? 'solid' : 'outline'}
-              containerStyle={{marginVertical: 15}}
+              containerStyle={styles.marginVertical15}
             />
             <Chip
               title="Sandbox"
@@ -151,7 +122,7 @@ const Home = ({navigation}: {navigation: any}) => {
                 initialize('Sandbox', 'I1pm4rfquPcBeTaVVFQACA==');
               }}
               type={selectedENV === 'sandbox' ? 'solid' : 'outline'}
-              containerStyle={{marginVertical: 15}}
+              containerStyle={styles.marginVertical15}
             />
             <Chip
               title="QA"
@@ -161,7 +132,7 @@ const Home = ({navigation}: {navigation: any}) => {
                 initialize('QA', 'cfE2+PcFh20BbxPI9+IACQ==');
               }}
               type={selectedENV === 'qa' ? 'solid' : 'outline'}
-              containerStyle={{marginVertical: 15}}
+              containerStyle={styles.marginVertical15}
             />
           </View>
         </View>
@@ -184,32 +155,15 @@ const MyModal: React.FC<
 
   return (
     <Modal transparent visible={showModal}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            backgroundColor: 'white',
-            width: '60%',
-            height: '30%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+      <View style={styles.modalBackground}>
+        <View style={styles.modalCardBackground}>
           {children}
           <Pressable
             onPress={() => {
               setShowModal(false);
               onCancel();
             }}
-            style={{
-              position: 'absolute',
-              right: '2%',
-              top: '2%',
-            }}>
+            style={styles.modalCrossPos}>
             <View>
               <Icon name="close" />
             </View>
@@ -221,6 +175,77 @@ const MyModal: React.FC<
 };
 
 const styles = StyleSheet.create({
+  modalCrossPos: {
+    position: 'absolute',
+    right: '2%',
+    top: '2%',
+  },
+  modalCardBackground: {
+    backgroundColor: 'white',
+    width: '60%',
+    height: '30%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  marginVertical15: {
+    marginVertical: 15,
+  },
+  modalHeader: {
+    flex: 1,
+    margin: 12,
+  },
+  envSwitchColor: {
+    color: 'dodgerblue',
+  },
+  envSelectorContainer: {
+    position: 'absolute',
+    right: '05%',
+    top: '1.5%',
+  },
+  padding5: {
+    paddingTop: 5,
+  },
+  btnFontStyle: {
+    fontSize: 18,
+    color: colors.blue[700],
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  margin20: {
+    margin: 20,
+  },
+  nextBtn: {
+    position: 'relative',
+    marginTop: '10%',
+    alignItems: 'flex-start',
+    flex: 1,
+  },
+  logo: {
+    aspectRatio: 5,
+    width: '75%',
+  },
+  envSelector: {
+    position: 'relative',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    width: '100%',
+    height: '20%',
+  },
+  safeArea: {
+    flex: 1,
+  },
+  background: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: 'linen',
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

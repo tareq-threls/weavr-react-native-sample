@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import {
@@ -81,8 +80,7 @@ export default function UpdatePassword({navigation}: {navigation: any}) {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{height: '40%', justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.topContainer}>
         <SecurePasswordTextField
           placeholder="Enter Password"
           style={styles.fieldBox}
@@ -125,14 +123,8 @@ export default function UpdatePassword({navigation}: {navigation: any}) {
           placeholderTextColor={colors.pink[200]}
         />
       </View>
-      <View style={{margin: 36}} />
-      <View
-        style={{
-          height: '10%',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}>
+      <View style={styles.margin36} />
+      <View style={styles.bottomContainer}>
         <Button title="tokenize" onPress={createGroupTokens} />
 
         <Button title="Check Match" onPress={matchValues} />
@@ -141,6 +133,20 @@ export default function UpdatePassword({navigation}: {navigation: any}) {
   );
 }
 const styles = StyleSheet.create({
+  margin36: {
+    margin: 36,
+  },
+  bottomContainer: {
+    height: '10%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  topContainer: {
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',

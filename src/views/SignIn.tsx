@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import {
@@ -52,7 +51,6 @@ export default function SignIn({navigation}: {navigation: any}) {
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   //clears the cache of the sdk, If you clear the cache you must re initialize sdk
   const clearCacheFunc = () => {
     clearCache().then((res: any) => {
@@ -121,8 +119,7 @@ export default function SignIn({navigation}: {navigation: any}) {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{height: '40%', justifyContent: 'center', alignItems: 'center'}}>
+      <View style={styles.topContainer}>
         <TextInput
           placeholder="Enter mail address"
           placeholderTextColor={colors.bluegrey[400]}
@@ -151,7 +148,7 @@ export default function SignIn({navigation}: {navigation: any}) {
           />
         </View>
       </View>
-      <View style={{margin: 8, alignItems: 'center'}}>
+      <View style={styles.bottomContainer}>
         <Button title="tokenize" onPress={createToken1} />
 
         <View style={styles.row}>
@@ -168,6 +165,15 @@ export default function SignIn({navigation}: {navigation: any}) {
   );
 }
 const styles = StyleSheet.create({
+  bottomContainer: {
+    margin: 8,
+    alignItems: 'center',
+  },
+  topContainer: {
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',

@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
 import {
@@ -83,16 +82,7 @@ export default function Cards({
               console.log('called  the card number');
             }, 1000);
           }}>
-          <View
-            style={{
-              width: '90%',
-              height: 'auto',
-              margin: 16,
-              borderWidth: 1,
-
-              borderRadius: 5,
-              borderColor: colors.grey[400],
-            }}>
+          <View style={styles.cardContainer}>
             <Text style={styles.item}>
               {value.cardFirst}******{value.cardLast}
             </Text>
@@ -100,11 +90,7 @@ export default function Cards({
             <Text style={styles.item}>{value.currency}</Text>
             <Text style={styles.item}>{value.nameOnCard}</Text>
 
-            <Text
-              style={[
-                styles.item,
-                {position: 'absolute', right: 0, bottom: 0},
-              ]}>
+            <Text style={[styles.item, styles.absolute]}>
               {value.cardBrand}
             </Text>
           </View>
@@ -117,14 +103,9 @@ export default function Cards({
         }}>
         <Image
           source={require('../assets/bank_card.png')}
-          style={{width: '100%', height: '100%'}}
+          style={styles.fullSize}
         />
-        <View
-          style={{
-            position: 'absolute',
-            top: '42%',
-            left: '33%',
-          }}>
+        <View style={styles.cardNumberContainer}>
           <SecureCardNumberLabel
             style={styles.labelBox}
             textColor={colors.grey[100]}
@@ -141,22 +122,8 @@ export default function Cards({
             ref={labelRef3}
           />
         </View>
-        <Text
-          style={{
-            position: 'absolute',
-            top: '70%',
-            left: '12%',
-            color: colors.grey[100],
-          }}>
-          {selectedCard?.nameOnCard}
-        </Text>
-        <View
-          style={{
-            position: 'absolute',
-            top: '67%',
-            right: '22%',
-            justifyContent: 'flex-end',
-          }}>
+        <Text style={styles.cardNameContainer}>{selectedCard?.nameOnCard}</Text>
+        <View style={styles.cvvContainer}>
           <SecureCardCVVLabel
             style={styles.cvvLabelBox}
             textColor={colors.grey[100]}
@@ -191,31 +158,15 @@ const MyModal: React.FC<
 
   return (
     <Modal transparent visible={showModal}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View
-          style={{
-            width: '100%',
-            height: '40%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalCardContainer}>
           {children}
           <Pressable
             onPress={() => {
               setShowModal(false);
               onCancel();
             }}
-            style={{
-              position: 'absolute',
-              right: '8%',
-              top: '20%',
-            }}>
+            style={styles.modalCrossPosition}>
             <View>
               <Icon name="close" color={colors.grey[100]} />
             </View>
@@ -226,6 +177,57 @@ const MyModal: React.FC<
   );
 };
 const styles = StyleSheet.create({
+  modalCrossPosition: {
+    position: 'absolute',
+    right: '8%',
+    top: '20%',
+  },
+  fullSize: {
+    width: '100%',
+    height: '100%',
+  },
+  modalCardContainer: {
+    width: '100%',
+    height: '40%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cvvContainer: {
+    position: 'absolute',
+    top: '67%',
+    right: '22%',
+    justifyContent: 'flex-end',
+  },
+  cardNameContainer: {
+    position: 'absolute',
+    top: '70%',
+    left: '12%',
+    color: colors.grey[100],
+  },
+  cardNumberContainer: {
+    position: 'absolute',
+    top: '42%',
+    left: '33%',
+  },
+  absolute: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+  cardContainer: {
+    width: '90%',
+    height: 'auto',
+    margin: 16,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.grey[400],
+  },
   item: {
     margin: 8,
   },

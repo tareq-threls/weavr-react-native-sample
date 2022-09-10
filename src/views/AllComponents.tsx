@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import {
   SecurePasswordTextField,
   SecureCardPinLabel,
@@ -153,13 +152,7 @@ export default function AllComponents({
         />
       </View>
 
-      <View
-        style={{
-          flex: 1,
-
-          justifyContent: 'center',
-          alignItems: 'stretch',
-        }}>
+      <View style={styles.cardsBtn}>
         <Button onPress={navigateToCardsPage} title="Cards" />
       </View>
     </View>
@@ -167,6 +160,11 @@ export default function AllComponents({
 }
 
 const styles = StyleSheet.create({
+  cardsBtn: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
   container: {
     flex: 1,
 
