@@ -1,39 +1,25 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from 'react';
+import {StyleSheet, View, TextInput, Button, Platform} from 'react-native';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  Platform,
-} from 'react-native';
-import {
-  initializeUXComponents,
   isAssociated,
   setUserToken,
   clearCache,
   SecurePasswordTextField,
-  matchComponents,
-  createTokens,
 } from '@weavr/react-native';
 import {useRef} from 'react';
 import Toast from 'react-native-simple-toast';
-import {WEAVR_BASE_URL} from '../constants/constants';
 import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {loginAsync} from '../repo/OnVirtualRepo';
 export default function SignIn({navigation}: {navigation: any}) {
   const [tagPass1, setTagPass1] = React.useState<string | undefined>();
-  const [tagPass2, setTagPass2] = React.useState<string | undefined>();
   const [loginToken, setLoginToken] = React.useState<string | undefined>();
 
   const [password, setPassword] = React.useState<string | undefined>();
   const [emailAddress, setEmailAddress] = React.useState<string | undefined>();
 
   const childRef = useRef<any>();
-  const childRef2 = useRef<any>();
 
   //Sdk Should be initialized on Application Create
   // React.useEffect(() => {
@@ -105,11 +91,11 @@ export default function SignIn({navigation}: {navigation: any}) {
       <View style={styles.topContainer}>
         <TextInput
           placeholder="Enter mail address"
-          placeholderTextColor={colors.bluegrey[400]}
+          placeholderTextColor={colors.white[500]}
           style={styles.input}
           onChangeText={setEmailAddress}
         />
-        <View style={styles.input}>
+        <View style={styles.inputPass}>
           <SecurePasswordTextField
             placeholder="Enter Password"
             style={[styles.fieldBox]}
@@ -127,7 +113,7 @@ export default function SignIn({navigation}: {navigation: any}) {
               console.log(resp);
             }}
             ref={childRef}
-            placeholderTextColor={colors.bluegrey[400]}
+            placeholderTextColor={colors.white[500]}
           />
         </View>
       </View>
@@ -169,9 +155,21 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     borderColor: colors.grey[300],
-    backgroundColor: colors.amber[300],
+    backgroundColor: colors.bluegrey[300],
     fontSize: 16,
     fontWeight: Platform.OS === 'android' ? 'semi-bold' : '600',
+  },
+
+  inputPass: {
+    height: 45,
+    width: '95%',
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    borderColor: colors.grey[300],
+    backgroundColor: colors.bluegrey[300],
   },
 
   row: {
@@ -182,9 +180,6 @@ const styles = StyleSheet.create({
   },
 
   fieldBox: {
-    width: '95%',
-    height: 45,
-    marginStart: 8,
-    position: 'absolute',
+    flex: 1,
   },
 });
