@@ -19,6 +19,7 @@ import {initializeUXComponents} from '@weavr/react-native';
 import {ENV} from '@weavr/react-native/lib/typescript/types/WeavrEnv';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PROD_UI_KEY, QA_UI_KEY, SAND_UI_KEY} from '../constants/constants';
 const Home = ({navigation}: {navigation: any}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -34,15 +35,18 @@ const Home = ({navigation}: {navigation: any}) => {
       switch (env) {
         case 'Production': {
           setSelectedENV('Production');
+          initialize('Production', PROD_UI_KEY);
           break;
         }
         case 'Sandbox': {
           setSelectedENV('Sandbox');
+          initialize('Sandbox', SAND_UI_KEY);
           break;
         }
 
         case 'QA': {
           setSelectedENV('QA');
+          initialize('QA', QA_UI_KEY);
           break;
         }
       }
@@ -126,7 +130,7 @@ const Home = ({navigation}: {navigation: any}) => {
               onPress={() => {
                 console.log('Icon chip was pressed!');
                 setSelectedENV('Production');
-                initialize('Production', '6keyUw1XiUkBbjXjgTUACA==');
+                initialize('Production', PROD_UI_KEY);
                 setShowModal(false);
               }}
               type={selectedENV === 'Production' ? 'solid' : 'outline'}
@@ -137,7 +141,7 @@ const Home = ({navigation}: {navigation: any}) => {
               onPress={() => {
                 console.log('Icon chip was pressed!');
                 setSelectedENV('Sandbox');
-                initialize('Sandbox', 'I1pm4rfquPcBeTaVVFQACA==');
+                initialize('Sandbox', SAND_UI_KEY);
                 setShowModal(false);
               }}
               type={selectedENV === 'Sandbox' ? 'solid' : 'outline'}
@@ -148,7 +152,7 @@ const Home = ({navigation}: {navigation: any}) => {
               onPress={() => {
                 console.log('Icon chip was pressed!');
                 setSelectedENV('QA');
-                initialize('QA', 'cfE2+PcFh20BbxPI9+IACQ==');
+                initialize('QA', QA_UI_KEY);
                 setShowModal(false);
               }}
               type={selectedENV === 'QA' ? 'solid' : 'outline'}

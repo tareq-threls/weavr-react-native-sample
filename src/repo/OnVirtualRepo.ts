@@ -18,12 +18,18 @@ const loginAsync = async (password?: string, emailAddress?: string) => {
         password: {value: password},
       }),
     });
+
+    if (!response.ok) {
+      throw new Error('Response code: ' + response.status);
+    }
+
     const json = await response.json();
 
     console.log(json);
     return json;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 

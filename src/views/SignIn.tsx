@@ -67,9 +67,18 @@ export default function SignIn({navigation}: {navigation: any}) {
 
   //Just a login function
   const loginApiAsync = async () => {
-    const json = await loginAsync(password, emailAddress);
-    setLoginToken(json.token);
-    setUserTokenInSDK(json.token);
+    console.log(password);
+    if (password == null) {
+      Toast.show('You must tokenize password first!');
+      return;
+    }
+    try {
+      const json = await loginAsync(password, emailAddress);
+      setLoginToken(json.token);
+      setUserTokenInSDK(json.token);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const navigateToNextPage = () => {
