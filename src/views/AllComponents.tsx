@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
     padding: 8,
     height: 40,
     marginVertical: 20,
-    fontFamily: 'Cochin',
   },
   cusRow: {
     flexDirection: 'row',
