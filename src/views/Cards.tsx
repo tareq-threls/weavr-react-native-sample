@@ -80,6 +80,7 @@ export default function Cards({
           style={styles.fullSize}
         />
         <View style={styles.cardNumberContainer}>
+          <Text>{selectedCard?.friendlyName} </Text>
           <SecureCardNumberLabel
             style={styles.labelBox}
             textColor={colors.grey[100]}
@@ -98,6 +99,7 @@ export default function Cards({
         </View>
         <Text style={styles.cardNameContainer}>{selectedCard?.nameOnCard}</Text>
         <View style={styles.cvvContainer}>
+          <Text>CVV </Text>
           <SecureCardCVVLabel
             style={styles.cvvLabelBox}
             textColor={colors.grey[100]}
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
   },
   cvvContainer: {
     position: 'absolute',
-    top: '67%',
+    top: '64%',
     right: '22%',
     justifyContent: 'flex-end',
   },
@@ -186,7 +188,7 @@ const styles = StyleSheet.create({
   },
   cardNumberContainer: {
     position: 'absolute',
-    top: '42%',
+    top: '38%',
     left: '33%',
   },
   absolute: {
