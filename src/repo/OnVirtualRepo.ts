@@ -12,6 +12,7 @@ const loginAsync = async (password?: string, emailAddress?: string) => {
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
+        // "api-key": "AFSLHC+2xucBgclOMS8BDA=="
       },
       body: JSON.stringify({
         email: emailAddress ? emailAddress : 'gary@test.com',
@@ -27,6 +28,32 @@ const loginAsync = async (password?: string, emailAddress?: string) => {
 
     console.log(json);
     return json;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+//Just a logout function
+const logoutAsync = async (apiKey: string, bearerToken: string) => {
+  try {
+    await updateBaseURL();
+    console.log(WEAVR_BASE_URL);
+    const response = await fetch(WEAVR_BASE_URL + 'logout', {
+      method: 'post',
+      headers: {
+        Accept: 'application/json',
+        'Content-type': 'application/json',
+        'api-key': apiKey,
+        Authorization: 'Bearer ' + bearerToken,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Response code: ' + response.status);
+    }
+
+    return;
   } catch (error) {
     console.error(error);
     throw error;
@@ -66,4 +93,4 @@ const getCardsAsync = async (token: string) => {
   }
 };
 
-export {loginAsync, getCardsAsync};
+export {loginAsync, logoutAsync, getCardsAsync};

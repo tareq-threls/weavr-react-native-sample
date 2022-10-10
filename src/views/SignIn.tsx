@@ -6,12 +6,15 @@ import {
   setUserToken,
   clearCache,
   SecurePasswordTextField,
+  resetAssociation,
 } from '@weavr/react-native';
 import {useRef} from 'react';
 import Toast from 'react-native-simple-toast';
 import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {loginAsync} from '../repo/OnVirtualRepo';
+import {logoutAsync} from '../repo/OnVirtualRepo';
+import {QA_UI_KEY} from '../constants/constants';
 export default function SignIn({navigation}: {navigation: any}) {
   const [tagPass1, setTagPass1] = React.useState<string | undefined>();
   const [loginToken, setLoginToken] = React.useState<string | undefined>();
@@ -81,6 +84,23 @@ export default function SignIn({navigation}: {navigation: any}) {
     }
   };
 
+  //Just a logout function
+  const logoutApiAsync = async () => {
+    console.log(password);
+    if (loginToken == null) {
+      Toast.show('You must Login  first!');
+      return;
+    }
+    try {
+      await logoutAsync(QA_UI_KEY, loginToken!).then(e => {
+        setLoginToken(undefined);
+        resetAssociation();
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const navigateToNextPage = () => {
     isAssociated().then(res => {
       if (res) {
@@ -132,9 +152,12 @@ export default function SignIn({navigation}: {navigation: any}) {
         <View style={styles.row}>
           <Button title="isAssociated" onPress={isAssociatedFunc} />
 
-          <Button title="Login" onPress={loginApiAsync} />
+          <Button
+            title={loginToken === undefined ? 'Login' : 'Logout'}
+            onPress={loginToken === undefined ? loginApiAsync : logoutApiAsync}
+          />
 
-          <Button title="U.Password" onPress={navigateToUpdatePasswordPage} />
+          <Button title="M.Password" onPress={navigateToUpdatePasswordPage} />
         </View>
 
         <Button title="Next" onPress={navigateToNextPage} />
@@ -189,6 +212,8 @@ const styles = StyleSheet.create({
   },
 
   fieldBox: {
-    flex: 1,
+    width: '95%',
+    height: 45,
+    marginVertical: 20,
   },
 });
