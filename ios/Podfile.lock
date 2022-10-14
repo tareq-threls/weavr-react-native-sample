@@ -431,7 +431,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
-  - "weavr-react-native (from `../node_modules/@weavr/react-native`)"
+  - "weavr-react-native (from `../node_modules/@weavr-io/secure-components-react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -527,7 +527,7 @@ EXTERNAL SOURCES:
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   weavr-react-native:
-    :path: "../node_modules/@weavr/react-native"
+    :path: "../node_modules/@weavr-io/secure-components-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 

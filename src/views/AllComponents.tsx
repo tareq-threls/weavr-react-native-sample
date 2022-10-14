@@ -3,7 +3,7 @@ import {
   SecureCardPinLabel,
   SecurePasscodeTextField,
   SecureCardPinTextField,
-} from '@weavr/react-native';
+} from '@weavr-io/secure-components-react-native';
 import React, {useRef} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Toast from 'react-native-simple-toast';
