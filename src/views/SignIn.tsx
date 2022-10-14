@@ -7,7 +7,7 @@ import {
   clearCache,
   SecurePasswordTextField,
   resetAssociation,
-} from '@weavr/react-native';
+} from '@weavr-io/secure-components-react-native';
 import {useRef} from 'react';
 import Toast from 'react-native-simple-toast';
 import {Routes} from '../App';

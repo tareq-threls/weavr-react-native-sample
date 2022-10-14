@@ -16,7 +16,7 @@ import {
   SecurePasswordTextField,
   matchComponents,
   createTokens,
-} from '@weavr/react-native';
+} from '@weavr-io/secure-components-react-native';
 import {useRef} from 'react';
 import Toast from 'react-native-simple-toast';
 import {WEAVR_BASE_URL} from '../constants/constants';

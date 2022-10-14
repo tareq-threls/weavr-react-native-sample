@@ -16,7 +16,10 @@ import {WEAVR_BASE_URL} from '../constants/constants';
 import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {Icon} from '@rneui/themed';
-import {SecureCardCVVLabel, SecureCardNumberLabel} from '@weavr/react-native';
+import {
+  SecureCardCVVLabel,
+  SecureCardNumberLabel,
+} from '@weavr-io/secure-components-react-native';
 import {CardItem} from '../models/CardItem';
 import {getCardsAsync} from '../repo/OnVirtualRepo';
 export default function Cards({

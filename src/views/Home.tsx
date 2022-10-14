@@ -15,8 +15,8 @@ import {
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {Chip, Divider, Icon, Image} from '@rneui/themed';
 import {Routes} from '../App';
-import {initializeUXComponents} from '@weavr/react-native';
-import {ENV} from '@weavr/react-native/lib/typescript/types/WeavrEnv';
+import {initializeUXComponents} from '@weavr-io/secure-components-react-native';
+import {ENV} from '@weavr-io/secure-components-react-native/lib/typescript/types/WeavrEnv';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PROD_UI_KEY, QA_UI_KEY, SAND_UI_KEY} from '../constants/constants';
