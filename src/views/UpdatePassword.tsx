@@ -31,13 +31,6 @@ export default function UpdatePassword({navigation}: {navigation: any}) {
   const childRef = useRef<any>();
   const childRef2 = useRef<any>();
 
-  //Sdk Should be initialized on Application Create
-  React.useEffect(() => {
-    initializeUXComponents('QA', 'cfE2+PcFh20BbxPI9+IACQ==')
-      .then(res => console.log(res))
-      .catch(e => console.log(e));
-  }, []);
-
   //it receives the tokenized password
   const onPassToken = (resp: any) => {
     console.log(resp);
@@ -62,9 +55,11 @@ export default function UpdatePassword({navigation}: {navigation: any}) {
     //we need to pass here the tags we get from the components
     createTokens([tagPass1!, tagPass2!]).then((res: any) => {
       console.log(res);
-      console.log(res[tagPass1!]);
-
-      Toast.show(res[tagPass1!]);
+      if (typeof res === 'string') {
+        Toast.show(res.toString());
+      } else {
+        Toast.show(res[tagPass1!]);
+      }
     });
   };
 

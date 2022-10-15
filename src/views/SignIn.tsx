@@ -15,9 +15,14 @@ import colors from '../utils/material-colors.json';
 import {loginAsync} from '../repo/OnVirtualRepo';
 import {logoutAsync} from '../repo/OnVirtualRepo';
 import {QA_UI_KEY} from '../constants/constants';
+export var global_login_token: string;
 export default function SignIn({navigation}: {navigation: any}) {
-  const [tagPass1, setTagPass1] = React.useState<string | undefined>();
+  const [tagPass1, setTagPass1] = React.useState<string | undefined>(
+    global_login_token,
+  );
   const [loginToken, setLoginToken] = React.useState<string | undefined>();
+  const [isAlreadyAssociated, setIsAlreadyAssociated] =
+    React.useState<boolean>(false);
 
   const [password, setPassword] = React.useState<string | undefined>();
   const [emailAddress, setEmailAddress] = React.useState<string | undefined>();
@@ -30,6 +35,16 @@ export default function SignIn({navigation}: {navigation: any}) {
   //     .then(res => console.log(res))
   //     .catch(e => console.log(e));
   // }, []);
+
+  React.useEffect(() => {
+    isAssociated().then((res: Boolean) => {
+      if (res === true) {
+        setIsAlreadyAssociated(true);
+      } else {
+        setIsAlreadyAssociated(false);
+      }
+    });
+  }, []);
 
   //It checks wheather our sdk is associated with a user or not
   const isAssociatedFunc = () => {
@@ -51,6 +66,7 @@ export default function SignIn({navigation}: {navigation: any}) {
   //it associate a user into sdk
   const setUserTokenInSDK = (token: string) => {
     console.log('set User token: ' + token);
+    global_login_token = token;
     setUserToken(token).then((res: any) => {
       console.log(res);
       Toast.show(res);
@@ -79,6 +95,7 @@ export default function SignIn({navigation}: {navigation: any}) {
       const json = await loginAsync(password, emailAddress);
       setLoginToken(json.token);
       setUserTokenInSDK(json.token);
+      setIsAlreadyAssociated(true);
     } catch (e) {
       console.log(e);
     }
@@ -86,15 +103,15 @@ export default function SignIn({navigation}: {navigation: any}) {
 
   //Just a logout function
   const logoutApiAsync = async () => {
-    console.log(password);
-    if (loginToken == null) {
+    if (loginToken == null && global_login_token == null) {
       Toast.show('You must Login  first!');
       return;
     }
     try {
-      await logoutAsync(QA_UI_KEY, loginToken!).then(e => {
+      await logoutAsync(QA_UI_KEY, loginToken ?? global_login_token).then(e => {
         setLoginToken(undefined);
         resetAssociation();
+        setIsAlreadyAssociated(false);
       });
     } catch (e) {
       console.log(e);
@@ -153,8 +170,8 @@ export default function SignIn({navigation}: {navigation: any}) {
           <Button title="isAssociated" onPress={isAssociatedFunc} />
 
           <Button
-            title={loginToken === undefined ? 'Login' : 'Logout'}
-            onPress={loginToken === undefined ? loginApiAsync : logoutApiAsync}
+            title={!isAlreadyAssociated ? 'Login' : 'Logout'}
+            onPress={!isAlreadyAssociated ? loginApiAsync : logoutApiAsync}
           />
 
           <Button title="M.Password" onPress={navigateToUpdatePasswordPage} />
