@@ -19,7 +19,7 @@ import {initializeUXComponents} from '@weavr-io/secure-components-react-native';
 import {ENV} from '@weavr-io/secure-components-react-native/lib/typescript/types/WeavrEnv';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PROD_UI_KEY, QA_UI_KEY, SAND_UI_KEY} from '../constants/constants';
+import {PROD_UI_KEY, QA_UI_KEY, SAND_UI_KEY} from '@env';
 const Home = ({navigation}: {navigation: any}) => {
   const isDarkMode = useColorScheme() === 'dark';
 

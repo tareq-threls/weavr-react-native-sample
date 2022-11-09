@@ -36,6 +36,10 @@ export default function Cards({
   const labelRef4 = useRef<any>();
   const getCards = async () => {
     const newCards = await getCardsAsync(route.params.token.toString());
+    if (newCards?.length === 0) {
+      Toast.show('No cards found');
+    }
+
     setCards(newCards);
   };
 
