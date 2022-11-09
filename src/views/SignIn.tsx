@@ -14,7 +14,7 @@ import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {loginAsync} from '../repo/OnVirtualRepo';
 import {logoutAsync} from '../repo/OnVirtualRepo';
-import {QA_UI_KEY} from '../constants/constants';
+import {QA_UI_KEY} from '@env';
 export var global_login_token: string;
 export default function SignIn({navigation}: {navigation: any}) {
   const [tagPass1, setTagPass1] = React.useState<string | undefined>(

@@ -18,6 +18,7 @@
     "@weavr-io/secure-components-react-native": "https://gitlab.com/open-payments-cloud/mobile/weavr-react-native.git#develop",
     "react": "18.1.0",
     "react-native": "0.70.0",
+    "react-native-dotenv": "^3.3.1",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.16.0",
     "react-native-simple-toast": "^1.1.4",
