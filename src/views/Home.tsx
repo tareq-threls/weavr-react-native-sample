@@ -19,7 +19,7 @@ import {initializeUXComponents} from '@weavr-io/secure-components-react-native';
 import {ENV} from '@weavr-io/secure-components-react-native/lib/typescript/types/WeavrEnv';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PROD_UI_KEY, QA_UI_KEY, SAND_UI_KEY} from '@env';
+import {PROD_UI_KEY, SAND_UI_KEY} from '@env';
 const Home = ({navigation}: {navigation: any}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -41,12 +41,6 @@ const Home = ({navigation}: {navigation: any}) => {
         case 'Sandbox': {
           setSelectedENV('Sandbox');
           initialize('Sandbox', SAND_UI_KEY);
-          break;
-        }
-
-        case 'QA': {
-          setSelectedENV('QA');
-          initialize('QA', QA_UI_KEY);
           break;
         }
       }
@@ -145,17 +139,6 @@ const Home = ({navigation}: {navigation: any}) => {
                 setShowModal(false);
               }}
               type={selectedENV === 'Sandbox' ? 'solid' : 'outline'}
-              containerStyle={styles.marginVertical15}
-            />
-            <Chip
-              title="QA"
-              onPress={() => {
-                console.log('Icon chip was pressed!');
-                setSelectedENV('QA');
-                initialize('QA', QA_UI_KEY);
-                setShowModal(false);
-              }}
-              type={selectedENV === 'QA' ? 'solid' : 'outline'}
               containerStyle={styles.marginVertical15}
             />
           </View>

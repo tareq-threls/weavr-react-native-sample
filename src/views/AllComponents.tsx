@@ -4,6 +4,7 @@ import {
   SecurePasscodeTextField,
   SecureCardPinTextField,
 } from '@weavr-io/secure-components-react-native';
+import colors from '../utils/material-colors.json';
 import React, {useRef} from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 import Toast from 'react-native-simple-toast';
@@ -34,9 +35,9 @@ export default function AllComponents({
       <View style={styles.cusRow}>
         <SecurePasswordTextField
           placeholder="Enter Password"
-          placeholderTextColor="#ff0000"
+          placeholderTextColor={colors.blue[700]}
           style={styles.fieldBox}
-          color="#fff000"
+          color={colors.bluegrey[100]}
           background={true}
           onGetTag={(resp: any) => {
             console.log(resp);
@@ -69,7 +70,7 @@ export default function AllComponents({
           placeholderTextColor="#000000"
           background={true}
           style={styles.fieldBox}
-          color="#fff000"
+          color={colors.bluegrey[100]}
           onGetTag={(resp: any) => {
             console.log(resp);
           }}
@@ -100,7 +101,7 @@ export default function AllComponents({
           placeholder="Enter Card Pin"
           placeholderTextColor="#000000"
           style={styles.fieldBox}
-          color="#fff000"
+          color={colors.bluegrey[100]}
           background={true}
           onGetTag={(resp: any) => {
             console.log(resp);
