@@ -14,7 +14,6 @@ import {Routes} from '../App';
 import colors from '../utils/material-colors.json';
 import {loginAsync} from '../repo/OnVirtualRepo';
 import {logoutAsync} from '../repo/OnVirtualRepo';
-import {QA_UI_KEY} from '@env';
 export var global_login_token: string;
 export default function SignIn({navigation}: {navigation: any}) {
   const [tagPass1, setTagPass1] = React.useState<string | undefined>(
@@ -28,13 +27,6 @@ export default function SignIn({navigation}: {navigation: any}) {
   const [emailAddress, setEmailAddress] = React.useState<string | undefined>();
 
   const childRef = useRef<any>();
-
-  //Sdk Should be initialized on Application Create
-  // React.useEffect(() => {
-  //   initializeUXComponents('QA', 'cfE2+PcFh20BbxPI9+IACQ==')
-  //     .then(res => console.log(res))
-  //     .catch(e => console.log(e));
-  // }, []);
 
   React.useEffect(() => {
     isAssociated().then((res: Boolean) => {
