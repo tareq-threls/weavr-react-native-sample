@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     top: '20%',
   },
   fullSize: {
-    width: '100%',
+    width: 490,
     height: '100%',
   },
   modalCardContainer: {
