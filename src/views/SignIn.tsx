@@ -108,7 +108,7 @@ export default function SignIn({navigation}: {navigation: any}) {
       return;
     }
     try {
-      await logoutAsync(QA_UI_KEY, loginToken ?? global_login_token).then(e => {
+      await logoutAsync(loginToken ?? global_login_token).then(e => {
         setLoginToken(undefined);
         resetAssociation();
         setIsAlreadyAssociated(false);

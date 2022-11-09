@@ -1,4 +1,4 @@
-import {WEAVR_BASE_URL} from '../constants/constants';
+import {WEAVR_API_KEY, WEAVR_BASE_URL} from '../constants/constants';
 import {CardItem} from '../models/CardItem';
 import {updateBaseURL} from '../constants/constants';
 
@@ -12,7 +12,7 @@ const loginAsync = async (password?: string, emailAddress?: string) => {
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
-        // "api-key": "AFSLHC+2xucBgclOMS8BDA=="
+        'api-key': WEAVR_API_KEY,
       },
       body: JSON.stringify({
         email: emailAddress ? emailAddress : 'gary@test.com',
@@ -35,7 +35,7 @@ const loginAsync = async (password?: string, emailAddress?: string) => {
 };
 
 //Just a logout function
-const logoutAsync = async (apiKey: string, bearerToken: string) => {
+const logoutAsync = async (bearerToken: string) => {
   try {
     await updateBaseURL();
     console.log(WEAVR_BASE_URL);
@@ -44,7 +44,7 @@ const logoutAsync = async (apiKey: string, bearerToken: string) => {
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
-        'api-key': apiKey,
+        'api-key': WEAVR_API_KEY,
         Authorization: 'Bearer ' + bearerToken,
       },
     });
@@ -69,11 +69,16 @@ const getCardsAsync = async (token: string) => {
         Accept: 'application/json',
         'Content-type': 'application/json',
         Authorization: 'Bearer ' + token,
+        'api-key': WEAVR_API_KEY,
       },
     });
     const json = await response.json();
     var newCards: CardItem[] = [];
     console.log(json.cards);
+    if (json.cards === undefined) {
+      return newCards;
+    }
+
     json.cards.forEach((element: any) => {
       newCards.push({
         cardBrand: element.cardBrand,
