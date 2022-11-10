@@ -1685,9 +1685,10 @@
     "@typescript-eslint/types" "5.36.2"
     eslint-visitor-keys "^3.3.0"
 
-"@weavr-io/secure-components-react-native@https://gitlab.com/open-payments-cloud/mobile/weavr-react-native.git#develop":
-  version "0.1.0"
-  resolved "https://gitlab.com/open-payments-cloud/mobile/weavr-react-native.git#5b6ee79a136d64bff5358f5efcbb29c27ec0b51d"
+"@weavr-io/secure-components-react-native@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@weavr-io/secure-components-react-native/-/secure-components-react-native-1.0.1.tgz#aad92084272b313408f5fc050d60258a6dde67e4"
+  integrity sha512-+5Ymsi3BIVEZ9X5wVf1Hhh0n6feLfXnrkvlTaqk4HioR3LG6MWA2oR0Kl1jAk8vFn+x2SFFXYbUG4Z6C3cMNpg==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"

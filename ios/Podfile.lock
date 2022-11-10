@@ -364,7 +364,7 @@ PODS:
     - React-Core
   - SocketRocket (0.6.0)
   - Toast (4.0.0)
-  - weavr-react-native (0.1.0):
+  - weavr-react-native (1.0.1):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -583,7 +583,7 @@ SPEC CHECKSUMS:
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  weavr-react-native: 1eb06b6e101ed790f02c57aa58f7ca1e504962a0
+  weavr-react-native: a6c2622ecf13c6c646cf3d2895548869dc7be9bb
   Yoga: 82c9e8f652789f67d98bed5aef9d6653f71b04a9
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
