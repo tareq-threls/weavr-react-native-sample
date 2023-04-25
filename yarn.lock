@@ -1685,10 +1685,10 @@
     "@typescript-eslint/types" "5.36.2"
     eslint-visitor-keys "^3.3.0"
 
-"@weavr-io/secure-components-react-native@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@weavr-io/secure-components-react-native/-/secure-components-react-native-1.0.1.tgz#aad92084272b313408f5fc050d60258a6dde67e4"
-  integrity sha512-+5Ymsi3BIVEZ9X5wVf1Hhh0n6feLfXnrkvlTaqk4HioR3LG6MWA2oR0Kl1jAk8vFn+x2SFFXYbUG4Z6C3cMNpg==
+"@weavr-io/secure-components-react-native@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@weavr-io/secure-components-react-native/-/secure-components-react-native-1.1.0.tgz#7ca299b80dbcc668ffb9a81434ff98b6c43e8c19"
+  integrity sha512-GKJ0a439vK2qTgIJG+m36g1xGU594dNWhBFc4Nh75BlFlHUYMskewdVBqs9yvsuuH5+nn5EL9b2tEru+ucT+VQ==
 
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.6"
